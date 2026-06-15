@@ -1,0 +1,213 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    --f1-red: #e10600;
+    --f1-bg-main: #1f1f27;
+    --f1-bg-card: #15151b;
+    --text-light: #f1f1f1;
+    --text-muted: #a0a0a0;
+    --border-dark: #2a2a35;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+body {
+    background-color: var(--f1-bg-main);
+    color: var(--text-light);
+    min-height: 100vh;
+    background-image: radial-gradient(circle at top center, #2a2a35 0%, var(--f1-bg-main) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Navigation */
+.pit-wall-nav {
+    width: 100%;
+    background-color: var(--f1-bg-card);
+    border-bottom: 4px solid var(--f1-red);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 1.5px;
+}
+
+.logo span {
+    color: var(--f1-red);
+}
+
+.back-btn {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.back-btn:hover {
+    color: var(--text-light);
+}
+
+/* Profile Layout */
+.profile-container {
+    width: 100%;
+    max-width: 800px;
+    padding: 40px 20px;
+}
+
+.card {
+    background-color: var(--f1-bg-card);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border-top: 3px solid var(--f1-red);
+}
+
+.card-header {
+    padding: 25px 30px;
+    border-bottom: 1px solid var(--border-dark);
+}
+
+.card-header h2 {
+    font-size: 1.5rem;
+    color: var(--text-light);
+    font-style: italic;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+}
+
+.card-header p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Form Styling */
+.profile-form {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.input-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.input-group.full-width {
+    width: 100%;
+}
+
+.input-group label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.input-group input, 
+.input-group select {
+    background-color: var(--f1-bg-main);
+    border: 1px solid var(--border-dark);
+    color: var(--text-light);
+    padding: 14px 15px;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus, 
+.input-group select:focus {
+    outline: none;
+    border-color: var(--f1-red);
+    box-shadow: 0 0 10px rgba(225, 6, 0, 0.2);
+}
+
+/* Specific Select Styling */
+.input-group select {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a0a0a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+}
+
+.input-group select option {
+    background-color: var(--f1-bg-card);
+    color: var(--text-light);
+}
+
+/* Security Section */
+.security-section {
+    margin-top: 10px;
+    padding-top: 25px;
+    border-top: 1px dashed var(--border-dark);
+}
+
+.security-section h3 {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 20px;
+    font-style: italic;
+    color: #a0a0a0;
+}
+
+/* Action Buttons */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.save-btn {
+    background-color: var(--f1-red);
+    color: white;
+    border: none;
+    padding: 16px 30px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    font-style: italic;
+    border-radius: 4px;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.save-btn:hover {
+    background-color: #c10500;
+}
+
+.save-btn:active {
+    transform: scale(0.98);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
