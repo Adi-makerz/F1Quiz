@@ -1,0 +1,264 @@
+/* Import Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+    --f1-red: #e10600;
+    --f1-bg-main: #1f1f27;
+    --f1-bg-card: #15151b;
+    --text-light: #f1f1f1;
+    --text-muted: #a0a0a0;
+    --border-dark: #2a2a35;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Titillium Web', sans-serif;
+}
+
+body {
+    background-color: var(--f1-bg-main);
+    color: var(--text-light);
+    min-height: 100vh;
+    background-image: radial-gradient(circle at top center, #2a2a35 0%, var(--f1-bg-main) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Navigation */
+/* Navigation Link Update */
+.profile-link {
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
+}
+
+.profile-link:hover {
+    color: var(--text-light);
+}
+
+.profile-link .username {
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+.profile-link:hover .username {
+    color: var(--f1-red);
+}
+
+/* Constructor Color Hints */
+.team-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 12px;
+    box-shadow: 0 0 5px rgba(255,255,255,0.2);
+}
+
+.team-dot.redbull { background-color: #3671C6; }
+.team-dot.mclaren { background-color: #FF8000; }
+.team-dot.ferrari { background-color: #E8002D; }
+.team-dot.mercedes { background-color: #27F4D2; }
+
+.pit-wall-nav {
+    width: 100%;
+    background-color: var(--f1-bg-card);
+    border-bottom: 4px solid var(--f1-red);
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-style: italic;
+    letter-spacing: 1.5px;
+}
+
+.logo span {
+    color: var(--f1-red);
+}
+
+.driver-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.username {
+    color: var(--text-light);
+    font-weight: 700;
+}
+
+.status-indicator {
+    width: 10px;
+    height: 10px;
+    background-color: #00d200; /* Green light */
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00d200;
+}
+
+/* Dashboard Grid Layout */
+.dashboard-container {
+    width: 100%;
+    max-width: 1200px;
+    padding: 40px 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 25px;
+}
+
+/* Component Cards */
+.card {
+    background-color: var(--f1-bg-card);
+    border-radius: 6px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    border-top: 3px solid var(--border-dark);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-top-color: var(--f1-red);
+}
+
+.card-header h2 {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    font-style: italic;
+    letter-spacing: 1.5px;
+    padding: 20px;
+    border-bottom: 1px solid var(--border-dark);
+}
+
+/* Telemetry Section */
+.score-display {
+    display: flex;
+    padding: 25px 20px;
+    gap: 15px;
+    flex-grow: 1;
+}
+
+.data-point {
+    flex: 1;
+    background-color: var(--f1-bg-main);
+    border: 1px solid var(--border-dark);
+    border-radius: 4px;
+    padding: 15px;
+    text-align: center;
+}
+
+.data-point .label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.data-point .value {
+    display: block;
+    font-size: 2.2rem;
+    color: var(--f1-red);
+    font-weight: 700;
+}
+
+.start-quiz-btn {
+    background-color: var(--f1-red);
+    color: white;
+    border: none;
+    padding: 20px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-style: italic;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: background-color 0.3s ease;
+    border-radius: 0 0 6px 6px;
+}
+
+.start-quiz-btn:hover {
+    background-color: #c10500;
+}
+
+/* Standings Table */
+.standings-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.standings-table th, 
+.standings-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-dark);
+}
+
+.standings-table th {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    background-color: var(--f1-bg-main);
+}
+
+.standings-table tr:hover {
+    background-color: #1b1b22;
+}
+
+.current-user {
+    background-color: rgba(225, 6, 0, 0.08);
+    border-left: 4px solid var(--f1-red);
+}
+
+.current-user td {
+    font-weight: 700;
+    color: white;
+}
+
+/* Intel Feed */
+.intel-feed {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.intel-item {
+    background-color: var(--f1-bg-main);
+    border-radius: 4px;
+    padding: 15px;
+    border-left: 2px solid var(--text-muted);
+}
+
+.intel-item p {
+    font-size: 0.9rem;
+    color: #ccc;
+    line-height: 1.5;
+}
+
+.badge {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-bottom: 8px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.badge.fact { background-color: #333; }
+.badge.tip { background-color: #0052cc; }
+.badge.local { background-color: var(--f1-red); }
