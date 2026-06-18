@@ -3,6 +3,7 @@ let sessionQuestions = [];
 let currentQuestionIndex = 0;
 let correctAnswers = 0;
 let pointsPerQuestion = 10;
+let currentDifficulty = 'medium'; // FIX: Declared currentDifficulty globally
 
 // DOM Elements
 const startScreen = document.getElementById('start-screen');
@@ -56,13 +57,15 @@ async function startQuiz() {
     quizScreen.classList.add('active');
 
     // Retrieve difficulty and set points per question
-    const difficulty = document.getElementById('difficulty-select').value;
-    if (difficulty === 'easy') pointsPerQuestion = 10;
-    else if (difficulty === 'medium') pointsPerQuestion = 20;
-    else if (difficulty === 'hard') pointsPerQuestion = 30;
+    const difficultySelect = document.getElementById('difficulty-select');
+    currentDifficulty = difficultySelect.value; // FIX: Assign selected difficulty to the global variable
+    
+    if (currentDifficulty === 'easy') pointsPerQuestion = 10;
+    else if (currentDifficulty === 'medium') pointsPerQuestion = 20;
+    else if (currentDifficulty === 'hard') pointsPerQuestion = 30;
 
     try {
-        const response = await fetch(`get_questions.php?difficulty=${difficulty}`);
+        const response = await fetch(`get_questions.php?difficulty=${currentDifficulty}`);
         const data = await response.json();
         
         sessionQuestions = data;
@@ -70,7 +73,7 @@ async function startQuiz() {
         correctAnswers = 0;
 
         if (sessionQuestions.length === 0) {
-            questionText.textContent = `No telemetry data found for ${difficulty} pace. Admin must add questions.`;
+            questionText.textContent = `No telemetry data found for ${currentDifficulty} pace. Admin must add questions.`;
             return;
         }
 
@@ -140,15 +143,15 @@ function showResults() {
     const formData = new FormData();
     formData.append('score', finalPoints);
     formData.append('correct', correctAnswers);
-    formData.append('accuracy', accuracy); // Added tracking metric
-    formData.append('difficulty', currentDifficulty); // Added difficulty level
+    formData.append('accuracy', accuracy);
+    formData.append('difficulty', currentDifficulty);
 
-    // Hitting update_score.php which will record both history and points balances
+    // Hit update_score.php which will record both history and points balances
     fetch('update_score.php', {
         method: 'POST',
         body: formData
     })
-    .then(response => response.json()) // Switching to JSON parsing to catch feedback
+    .then(response => response.json()) 
     .then(data => {
         if(data.success) {
             console.log("Telemetry logs synchronized: " + data.message);
