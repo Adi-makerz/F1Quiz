@@ -4,15 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1Quiz - Test Your Formula 1 Knowledge</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/landing_page.css?v=1.1">
     <!-- Google Fonts for a racing/sporty look -->
-    <link href="https://fonts.googleapis.com/css2?family=Formula1:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- Navigation Bar -->
     <header class="navbar">
-        <div class="logo">F1<span>QUIZ</span></div>
+        <div class="logo">F1 <span>ULTIMATE</span> QUIZ</div>
         <nav>
             <a href="login.php" class="btn btn-secondary">Login</a>
             <a href="register.php" class="btn btn-primary">Sign Up</a>
@@ -21,6 +21,13 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <!-- Background Video Loop -->
+        <video autoplay loop muted playsinline class="hero-video">
+            <!-- Replace this URL with your local video path (e.g., video/f1-bg.mp4) or keep this streaming placeholder -->
+            <source src="https://assets.mixkit.co/videos/preview/mixkit-formula-one-racing-car-driving-on-a-track-40220-large.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <span class="badge">Lights Out and Away We Go!</span>

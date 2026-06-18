@@ -71,7 +71,7 @@ $team_standings_result = $conn->query($team_standings_query);
         <div class="driver-profile">
             <span class="status-indicator"></span>
             <a href="profile.php" class="profile-link">Driver: <span class="username"><?php echo htmlspecialchars($user_data['username'] ?? ''); ?></span></a>
-            <a href="login.php" style="color:var(--text-muted); text-decoration:none; margin-left:15px; font-size:0.8rem;">[ LOGOUT ]</a>
+            <a href="landing_page.php" style="color:var(--text-muted); text-decoration:none; margin-left:15px; font-size:0.8rem;">[ LOGOUT ]</a>
         </div>
     </header>
 
