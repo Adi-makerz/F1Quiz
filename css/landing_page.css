@@ -109,8 +109,8 @@ nav a {
     display: flex;
     align-items: center;
     padding: 0 8%;
-    overflow: hidden; /* Crucial to keep the video block from overflowing the container wrapper */
-    background-color: var(--bg-dark); /* Fallback safety color */
+    overflow: hidden; /* Stops the video from stretching the page width */
+    background-color: var(--bg-dark); /* Fallback color if video fails to load */
 }
 
 /* Background Video Formatting Rules */
@@ -122,10 +122,10 @@ nav a {
     min-height: 100%;
     width: auto;
     height: auto;
-    transform: translate(-50%, -50%); /* Centers the wide format video frames cleanly */
-    object-fit: cover; /* Forces it to fill the entire container like a background image */
+    transform: translate(-50%, -50%); /* Centers the video perfectly */
+    object-fit: cover; /* Forces the video to fill the screen without distorting */
     z-index: 0;
-    pointer-events: none; /* Prevents users from accidentally right-clicking or pausing the background track loop */
+    pointer-events: none; /* Stops users from accidentally right-clicking or pausing the video */
 }
 
 /* Dark Tint Overlay to keep text easily readable */
@@ -135,6 +135,7 @@ nav a {
     left: 0;
     width: 100%;
     height: 100%;
+    /* Gradient tint: Darker on the left where the text is, lighter on the right */
     background: linear-gradient(to right, rgba(11, 12, 16, 0.95) 35%, rgba(11, 12, 16, 0.5) 100%);
     z-index: 1;
 }
@@ -143,7 +144,7 @@ nav a {
 .hero-content {
     max-width: 650px;
     position: relative;
-    z-index: 2; /* Keeps text layered comfortably above the overlay and video planes */
+    z-index: 2; /* Ensures text is clickable and sits above the video and tint */
 }
 
 .badge {

@@ -23,11 +23,14 @@
     <section class="hero">
         <!-- Background Video Loop -->
         <video autoplay loop muted playsinline class="hero-video">
-            <source href="video/f1-bg.mp4" type="video/mp4">
+            <source src="video/f1-bg.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
+        <!-- Dark tint to ensure text remains readable -->
         <div class="hero-overlay"></div>
+        
+        <!-- Content wrapper -->
         <div class="hero-content">
             <span class="badge">Lights Out and Away We Go!</span>
             <h1>Are You the Ultimate <br><span class="highlight">Formula 1</span> Fan?</h1>
