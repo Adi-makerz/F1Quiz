@@ -23,8 +23,7 @@
     <section class="hero">
         <!-- Background Video Loop -->
         <video autoplay loop muted playsinline class="hero-video">
-            <!-- Replace this URL with your local video path (e.g., video/f1-bg.mp4) or keep this streaming placeholder -->
-            <source src="https://assets.mixkit.co/videos/preview/mixkit-formula-one-racing-car-driving-on-a-track-40220-large.mp4" type="video/mp4">
+            <source href="video/f1-bg.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
