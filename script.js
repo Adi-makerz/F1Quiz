@@ -3,7 +3,7 @@ let sessionQuestions = [];
 let currentQuestionIndex = 0;
 let correctAnswers = 0;
 let pointsPerQuestion = 10;
-let currentDifficulty = 'medium'; // FIX: Declared currentDifficulty globally
+let currentDifficulty = 'medium';
 
 // DOM Elements
 const startScreen = document.getElementById('start-screen');
@@ -58,7 +58,7 @@ async function startQuiz() {
 
     // Retrieve difficulty and set points per question
     const difficultySelect = document.getElementById('difficulty-select');
-    currentDifficulty = difficultySelect.value; // FIX: Assign selected difficulty to the global variable
+    currentDifficulty = difficultySelect.value;
     
     if (currentDifficulty === 'easy') pointsPerQuestion = 10;
     else if (currentDifficulty === 'medium') pointsPerQuestion = 20;
