@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1Quiz - Test Your Formula 1 Knowledge</title>
     <link rel="stylesheet" href="css/landing_page.css?v=1.1">
+    <link rel="icon" type="image/x-icon" href="media/logo.ico">
     <!-- Google Fonts for a racing/sporty look -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
@@ -23,7 +24,7 @@
     <section class="hero">
         <!-- Background Video Loop -->
         <video autoplay loop muted playsinline class="hero-video">
-            <source src="video/f1-bg.mp4" type="video/mp4">
+            <source src="media/f1-bg.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
 
@@ -36,7 +37,7 @@
             <h1>Are You the Ultimate <br><span class="highlight">Formula 1</span> Fan?</h1>
             <p>Put your F1 knowledge to the ultimate test. Outsmart the grid, climb the global leaderboard, and prove you belong on the podium.</p>
             <div class="hero-actions">
-                <a href="register.php" class="btn btn-large btn-primary">Start Racing Now</a>
+                <a href="login.php" class="btn btn-large btn-primary">Start Racing Now</a>
                 <a href="#features" class="btn btn-large btn-outline">Learn More</a>
             </div>
         </div>
