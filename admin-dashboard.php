@@ -129,6 +129,7 @@ $activity_logs = $conn->query("SELECT u.username, a.action, a.timestamp FROM act
     <title>F1 Grid Quiz - Admin Pit Wall</title>
     <link rel="stylesheet" href="css/dashboard.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="css/admin-dashboard.css?v=<?php echo time(); ?>">
+    <link rel="icon" type="image/x-icon" href="media/logo.ico">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
