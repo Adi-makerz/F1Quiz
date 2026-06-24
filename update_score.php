@@ -5,6 +5,9 @@ require 'db.php';
 // Force PHP to report any hidden SQL errors out loud
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
+// FIX: Set the header so the JS fetch() API parses the response cleanly as JSON
+header('Content-Type: application/json');
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['user_id'])) {
     
     // Grab variables from the Javascript FormData
@@ -13,8 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['user_id'])) {
     $difficulty = isset($_POST['difficulty']) ? $_POST['difficulty'] : 'unknown';
     $user_id = $_SESSION['user_id'];
 
-    // Calculate accuracy percentage dynamically
-    $accuracy = ($correct / 10) * 100;
+    // FIX: Pull accuracy straight from the POST payload instead of hardcoding 10
+    $accuracy = isset($_POST['accuracy']) ? (int)$_POST['accuracy'] : ($correct / 10) * 100;
 
     // 1. UPDATE USER POINTS TOTAL
     if ($score > 0) {
@@ -25,8 +28,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['user_id'])) {
     }
     
     // 2. INSERT INTO QUIZ RESULTS HISTORY
-    // We explicitly name every column to match your image structure exactly:
-    // (userID, accuracy, score, Qdifficulty)
     $stmt2 = $conn->prepare("INSERT INTO quizresult (userID, accuracy, score, Qdifficulty) VALUES (?, ?, ?, ?)");
     $stmt2->bind_param("iiis", $user_id, $accuracy, $score, $difficulty);
     $stmt2->execute();
@@ -34,11 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_SESSION['user_id'])) {
 
     // 3. RUN LOG USER ACTION TEXT LOGGER
     if (function_exists('logUserAction')) {
-        logUserAction($conn, $user_id, "Completed $difficulty quiz: $correct/10 correct. Earned $score pts.");
+        logUserAction($conn, $user_id, "Completed $difficulty quiz: $correct correct. Earned $score pts.");
     }
 
-    echo "Success";
+    // FIX: Return a JSON object so `response.json()` in script.js succeeds
+    echo json_encode(['success' => true, 'message' => 'Points successfully added to license']);
+    exit();
 } else {
-    echo "Error: Unauthenticated access or invalid method request.";
+    // FIX: Return a JSON formatted error 
+    echo json_encode(['success' => false, 'message' => 'Error: Unauthenticated access or invalid method request.']);
+    exit();
 }
 ?>

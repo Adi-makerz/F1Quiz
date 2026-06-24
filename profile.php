@@ -9,7 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 $status_msg = "";
-$msg_type = ""; // To differentiate between success (cyan/green) and error (red) colors
+$msg_type = ""; 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];
@@ -19,23 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Check if the user intends to change their password
     if (!empty($_POST['new-password'])) {
         if ($_POST['new-password'] === $_POST['confirm-password']) {
-            // Securely hashes the password. (Shows as a long string in phpMyAdmin, but verifies perfectly on login)
             $new_password = password_hash($_POST['new-password'], PASSWORD_DEFAULT);
             $stmt = $conn->prepare("UPDATE users SET email=?, teamID=?, password=? WHERE id=?");
             $stmt->bind_param("sssi", $email, $teamID, $new_password, $user_id);
             $password_updated = true;
         } else {
-            // Passwords mismatch error state trigger
             $status_msg = "Telemetry Key Update Failed: Passwords do not match.";
             $msg_type = "error";
         }
     } else {
-        // No password change requested, update email and team allegiance only
         $stmt = $conn->prepare("UPDATE users SET email=?, teamID=? WHERE id=?");
         $stmt->bind_param("ssi", $email, $teamID, $user_id);
     }
     
-    // Execute the database write if no matching password mismatch occurred prior
     if ($msg_type !== "error") {
         if ($stmt->execute()) {
             $status_msg = $password_updated 
@@ -49,7 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Fetch current details to populate form
 $stmt = $conn->prepare("SELECT username, email, teamID FROM users WHERE id = ?");
 $stmt->bind_param("i", $user_id);
 $stmt->execute();
@@ -63,10 +58,7 @@ if($team_query){
     }
 }
 
-// =========================================================================
-// NEW: LIVE TELEMETRY LOGS QUERIES FOR PROFILE METRICS
-// =========================================================================
-// 1. Fetch career aggregates (Total Races and Average Accuracy)
+
 $stats_query = $conn->prepare("SELECT COUNT(*) as total_races, AVG(accuracy) as avg_accuracy FROM quizresult WHERE userID = ?");
 $stats_query->bind_param("i", $user_id);
 $stats_query->execute();
@@ -75,8 +67,7 @@ $stats = $stats_query->get_result()->fetch_assoc();
 $total_races = $stats['total_races'] ?? 0;
 $avg_accuracy = isset($stats['avg_accuracy']) ? round($stats['avg_accuracy'], 1) : 0;
 
-// 2. Fetch the 5 most recent completed session rows (tracking dateCompleted)
-// Configured to dynamically pull from your exact database column setup
+
 $history_stmt = $conn->prepare("SELECT accuracy, score, Qdifficulty, dateCompleted FROM quizresult WHERE userID = ? ORDER BY dateCompleted DESC LIMIT 5");
 $history_stmt->bind_param("i", $user_id);
 $history_stmt->execute();
@@ -89,9 +80,10 @@ $history_results = $history_stmt->get_result();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1 Grid Quiz - Driver Profile</title>
     <link rel="stylesheet" href="css/profile.css">
+    <link rel="icon" type="image/x-icon" href="media/logo.ico">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
     <style>
-        /* Custom layout modifications matching the F1 Pit Wall Design System */
+
         .telemetry-row {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -174,10 +166,7 @@ $history_results = $history_stmt->get_result();
     </header>
 
     <main class="profile-container" style="max-width: 850px; margin: 40px auto; padding: 0 20px;">
-        
-        <!-- =========================================================================
-            NEW: DYNAMIC DRIVER TELEMETRY OVERVIEW SECTION
-        ========================================================================= -->
+
         <div class="telemetry-row">
             <div class="stat-card races">
                 <p>Total Grands Prix Started</p>
@@ -189,7 +178,6 @@ $history_results = $history_stmt->get_result();
             </div>
         </div>
 
-        <!-- NEW: VISUAL LAP TIMELINE HISTORY CARD -->
         <div class="history-card">
             <h3>🏁 Personal Lap Record Log</h3>
             <table class="telemetry-table">
@@ -225,7 +213,7 @@ $history_results = $history_stmt->get_result();
                 </tbody>
             </table>
         </div>
-        <!-- ========================================================================= -->
+ 
 
         <!-- ORIGINAL DRIVER IDENTIFICATION CREDENTIALS FORM -->
         <section class="card profile-card" style="margin-top: 0;">

@@ -129,6 +129,7 @@ $activity_logs = $conn->query("SELECT u.username, a.action, a.timestamp FROM act
     <title>F1 Grid Quiz - Admin Pit Wall</title>
     <link rel="stylesheet" href="css/dashboard.css?v=<?php echo time(); ?>">
     <link rel="stylesheet" href="css/admin-dashboard.css?v=<?php echo time(); ?>">
+    <link rel="icon" type="image/x-icon" href="media/logo.ico">
     <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -158,18 +159,18 @@ $activity_logs = $conn->query("SELECT u.username, a.action, a.timestamp FROM act
             </div>
         </section>
         
-        <!-- MANAGE DRIVERS SECTION -->
         <section class="card">
             <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                <div class="clickable-title" onclick="toggleSection('usersContainer')">
+                <div class="clickable-title" onclick="toggleSection('usersContainer', this)">
                     <h2 style="margin:0;">MANAGE DRIVERS</h2>
+                    <span class="toggle-icon minimized">▼</span>
                 </div>
                 <div class="premium-search-wrapper">
                     <input type="text" id="searchUsers" class="premium-search-input" placeholder="Search drivers..." onkeyup="filterTable('searchUsers', 'usersTable')">
                 </div>
             </div>
             
-            <div id="usersContainer">
+            <div id="usersContainer" style="display: none;">
                 <form class="admin-form" method="POST">
                     <input type="hidden" name="action" value="add_user">
                     <input type="text" name="username" placeholder="Driver Username" required>
@@ -228,85 +229,83 @@ $activity_logs = $conn->query("SELECT u.username, a.action, a.timestamp FROM act
             </div>
         </section>
 
-        <!-- MANAGE TELEMETRY QUESTIONS SECTION -->
-<section class="card">
-    <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-        <div class="clickable-title" onclick="toggleSection('questionsContainer')">
-            <h2 style="margin:0;">MANAGE TELEMETRY (QUESTIONS)</h2>
-        </div>
-        <div class="premium-search-wrapper">
-            <input type="text" id="searchQuestions" class="premium-search-input" placeholder="Search questions or answers..." onkeyup="filterTable('searchQuestions', 'questionsTable')">
-        </div>
-    </div>
-    
-    <div id="questionsContainer">
-        <form class="admin-form" method="POST">
-            <input type="hidden" name="action" value="add_question">
-            <input type="text" name="question" class="input-wide" placeholder="Enter Full Question Text" required>
-            <input type="text" name="option_a" placeholder="Option A" required>
-            <input type="text" name="option_b" placeholder="Option B" required>
-            <input type="text" name="option_c" placeholder="Option C" required>
-            <input type="text" name="option_d" placeholder="Option D" required>
-            <input type="text" name="correct_answer" class="input-answer" placeholder="Exact Correct Answer" required>
-            <select name="difficulty">
-                <option value="Easy">Easy</option>
-                <option value="Medium" selected>Medium</option>
-                <option value="Hard">Hard</option>
-            </select>
-            <button type="submit" class="admin-btn">DEPLOY QUESTION</button>
-        </form>
-        
-        <div class="admin-table-container">
-            <table id="questionsTable">
-                <thead>
-                    <tr><th>ID</th><th>Difficulty</th><th>Question</th><th>Correct Answer</th><th>Action</th></tr>
-                </thead>
-                <tbody>
-                    <?php while($q = $questions->fetch_assoc()): 
-                        $qID   = $q['id'] ?? $q['questionID'] ?? 0;
-                        $qText = $q['question'] ?? $q['questionText'] ?? '';
-                        $qA    = $q['option_a'] ?? $q['answerA'] ?? '';
-                        $qB    = $q['option_b'] ?? $q['answerB'] ?? '';
-                        $qC    = $q['option_c'] ?? $q['answerC'] ?? '';
-                        $qD    = $q['option_d'] ?? $q['answerD'] ?? '';
-                        $qAns  = $q['correct_answer'] ?? $q['answerRight'] ?? '';
-                        $qDiff = $q['difficulty'] ?? $q['difficultyLevel'] ?? 'Medium';
-                    ?>
-                    <tr>
-                        <td><?php echo $qID; ?></td>
-                        <td><span style="text-transform: capitalize; color: var(--text-muted); font-size:0.85rem;"><?php echo htmlspecialchars($qDiff); ?></span></td>
-                        <td><?php echo htmlspecialchars($qText); ?></td>
-                        <!-- FIXED: Placed the class cleanly inside the td element wrapper -->
-                        <td class="answer-text"><?php echo htmlspecialchars($qAns); ?></td>
-                        <td>
-                            <div class="action-buttons">
-                                <button type="button" class="admin-btn" style="background: var(--success-cyan); color: #000;" 
-                                    onclick="openQuestionEdit(
-                                        <?php echo $qID; ?>, 
-                                        '<?php echo htmlspecialchars(addslashes($qText)); ?>', 
-                                        '<?php echo htmlspecialchars(addslashes($qA)); ?>', 
-                                        '<?php echo htmlspecialchars(addslashes($qB)); ?>', 
-                                        '<?php echo htmlspecialchars(addslashes($qC)); ?>', 
-                                        '<?php echo htmlspecialchars(addslashes($qD)); ?>',
-                                        '<?php echo htmlspecialchars(addslashes($qAns)); ?>',
-                                        '<?php echo htmlspecialchars(addslashes($qDiff)); ?>'
-                                    )">EDIT</button>
-                                <form method="POST" style="display:inline;">
-                                    <input type="hidden" name="action" value="delete_question">
-                                    <input type="hidden" name="id" value="<?php echo $qID; ?>">
-                                    <button type="submit" class="admin-btn danger" onclick="return confirm('Delete this question?');">DEL</button>
-                                </form>
-                            </div>
-                        </td>
-                    </tr>
-                    <?php endwhile; ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-</section>
+        <section class="card">
+            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div class="clickable-title" onclick="toggleSection('questionsContainer', this)">
+                    <h2 style="margin:0;">MANAGE TELEMETRY (QUESTIONS)</h2>
+                    <span class="toggle-icon minimized">▼</span>
+                </div>
+                <div class="premium-search-wrapper">
+                    <input type="text" id="searchQuestions" class="premium-search-input" placeholder="Search questions or answers..." onkeyup="filterTable('searchQuestions', 'questionsTable')">
+                </div>
+            </div>
+            
+            <div id="questionsContainer" style="display: none;">
+                <form class="admin-form" method="POST">
+                    <input type="hidden" name="action" value="add_question">
+                    <input type="text" name="question" class="input-wide" placeholder="Enter Full Question Text" required>
+                    <input type="text" name="option_a" placeholder="Option A" required>
+                    <input type="text" name="option_b" placeholder="Option B" required>
+                    <input type="text" name="option_c" placeholder="Option C" required>
+                    <input type="text" name="option_d" placeholder="Option D" required>
+                    <input type="text" name="correct_answer" class="input-answer" placeholder="Exact Correct Answer" required>
+                    <select name="difficulty">
+                        <option value="Easy">Easy</option>
+                        <option value="Medium" selected>Medium</option>
+                        <option value="Hard">Hard</option>
+                    </select>
+                    <button type="submit" class="admin-btn">DEPLOY QUESTION</button>
+                </form>
+                
+                <div class="admin-table-container">
+                    <table id="questionsTable">
+                        <thead>
+                            <tr><th>ID</th><th>Difficulty</th><th>Question</th><th>Correct Answer</th><th>Action</th></tr>
+                        </thead>
+                        <tbody>
+                            <?php while($q = $questions->fetch_assoc()): 
+                                $qID   = $q['id'] ?? $q['questionID'] ?? 0;
+                                $qText = $q['question'] ?? $q['questionText'] ?? '';
+                                $qA    = $q['option_a'] ?? $q['answerA'] ?? '';
+                                $qB    = $q['option_b'] ?? $q['answerB'] ?? '';
+                                $qC    = $q['option_c'] ?? $q['answerC'] ?? '';
+                                $qD    = $q['option_d'] ?? $q['answerD'] ?? '';
+                                $qAns  = $q['correct_answer'] ?? $q['answerRight'] ?? '';
+                                $qDiff = $q['difficulty'] ?? $q['difficultyLevel'] ?? 'Medium';
+                            ?>
+                            <tr>
+                                <td><?php echo $qID; ?></td>
+                                <td><span style="text-transform: capitalize; color: var(--text-muted); font-size:0.85rem;"><?php echo htmlspecialchars($qDiff); ?></span></td>
+                                <td><?php echo htmlspecialchars($qText); ?></td>
+                                <td class="answer-text"><?php echo htmlspecialchars($qAns); ?></td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button type="button" class="admin-btn" style="background: var(--success-cyan); color: #000;" 
+                                            onclick="openQuestionEdit(
+                                                <?php echo $qID; ?>, 
+                                                '<?php echo htmlspecialchars(addslashes($qText)); ?>', 
+                                                '<?php echo htmlspecialchars(addslashes($qA)); ?>', 
+                                                '<?php echo htmlspecialchars(addslashes($qB)); ?>', 
+                                                '<?php echo htmlspecialchars(addslashes($qC)); ?>', 
+                                                '<?php echo htmlspecialchars(addslashes($qD)); ?>',
+                                                '<?php echo htmlspecialchars(addslashes($qAns)); ?>',
+                                                '<?php echo htmlspecialchars(addslashes($qDiff)); ?>'
+                                            )">EDIT</button>
+                                        <form method="POST" style="display:inline;">
+                                            <input type="hidden" name="action" value="delete_question">
+                                            <input type="hidden" name="id" value="<?php echo $qID; ?>">
+                                            <button type="submit" class="admin-btn danger" onclick="return confirm('Delete this question?');">DEL</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                            <?php endwhile; ?>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
 
-        <!-- FIX: Relocated Driver Activity Log container block directly to the bottom area -->
         <?php if($activity_logs): ?>
         <section class="card">
             <div class="card-header"><h2>DRIVER ACTIVITY LOG</h2></div>
@@ -333,7 +332,6 @@ $activity_logs = $conn->query("SELECT u.username, a.action, a.timestamp FROM act
 
     </main>
 
-    <!-- MODAL POPUPS -->
     <div id="userEditModal" class="modal-overlay">
         <div class="modal-box">
             <h2>UPDATE DRIVER TELEMETRY</h2>
@@ -411,9 +409,17 @@ $activity_logs = $conn->query("SELECT u.username, a.action, a.timestamp FROM act
             document.getElementById('questionEditModal').style.display = 'none';
         }
 
-        function toggleSection(containerId) {
+        function toggleSection(containerId, titleElement) {
             const container = document.getElementById(containerId);
-            container.style.display = (container.style.display === 'none' || container.style.display === '') ? 'block' : 'none';
+            const icon = titleElement ? titleElement.querySelector('.toggle-icon') : null;
+            
+            if (container.style.display === 'none' || container.style.display === '') {
+                container.style.display = 'block';
+                if(icon) icon.classList.remove('minimized');
+            } else {
+                container.style.display = 'none';
+                if(icon) icon.classList.add('minimized');
+            }
         }
 
         function filterTable(inputId, tableId) {

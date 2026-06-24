@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>F1Quiz - Test Your Formula 1 Knowledge</title>
-    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="css/landing_page.css?v=1.1">
+    <link rel="icon" type="image/x-icon" href="media/logo.ico">
     <!-- Google Fonts for a racing/sporty look -->
-    <link href="https://fonts.googleapis.com/css2?family=Formula1:wght@400;700&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <!-- Navigation Bar -->
     <header class="navbar">
-        <div class="logo">F1<span>QUIZ</span></div>
+        <div class="logo">F1 <span>ULTIMATE</span> QUIZ</div>
         <nav>
             <a href="login.php" class="btn btn-secondary">Login</a>
             <a href="register.php" class="btn btn-primary">Sign Up</a>
@@ -21,13 +22,22 @@
 
     <!-- Hero Section -->
     <section class="hero">
+        <!-- Background Video Loop -->
+        <video autoplay loop muted playsinline class="hero-video">
+            <source src="media/f1-bg.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <!-- Dark tint to ensure text remains readable -->
         <div class="hero-overlay"></div>
+        
+        <!-- Content wrapper -->
         <div class="hero-content">
             <span class="badge">Lights Out and Away We Go!</span>
             <h1>Are You the Ultimate <br><span class="highlight">Formula 1</span> Fan?</h1>
             <p>Put your F1 knowledge to the ultimate test. Outsmart the grid, climb the global leaderboard, and prove you belong on the podium.</p>
             <div class="hero-actions">
-                <a href="register.php" class="btn btn-large btn-primary">Start Racing Now</a>
+                <a href="login.php" class="btn btn-large btn-primary">Start Racing Now</a>
                 <a href="#features" class="btn btn-large btn-outline">Learn More</a>
             </div>
         </div>

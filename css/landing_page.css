@@ -1,0 +1,302 @@
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #e10600; /* F1 Racing Red */
+    --bg-dark: #0b0c10;
+    --bg-card: #1f2833;
+    --text-main: #ffffff;
+    --text-muted: #c5a059;
+    --text-gray: #a9b7c6;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* Typography Enhancements */
+h1, h2, h3, .logo {
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background-color: rgba(11, 12, 16, 0.95);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #fff;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+nav a {
+    margin-left: 20px;
+}
+
+/* Buttons */
+.btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #b80500;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(225, 6, 0, 0.4);
+}
+
+.btn-secondary {
+    color: #fff;
+}
+
+.btn-secondary:hover {
+    color: var(--primary-color);
+}
+
+.btn-outline {
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+
+.btn-outline:hover {
+    border-color: #fff;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.btn-large {
+    padding: 15px 32px;
+    font-size: 1rem;
+}
+
+/* Hero Section with F1 Car Background Image */
+/* Hero Section Container */
+.hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+    overflow: hidden; /* Stops the video from stretching the page width */
+    background-color: var(--bg-dark); /* Fallback color if video fails to load */
+}
+
+/* Background Video Formatting Rules */
+.hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    transform: translate(-50%, -50%); /* Centers the video perfectly */
+    object-fit: cover; /* Forces the video to fill the screen without distorting */
+    z-index: 0;
+    pointer-events: none; /* Stops users from accidentally right-clicking or pausing the video */
+}
+
+/* Dark Tint Overlay to keep text easily readable */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Gradient tint: Darker on the left where the text is, lighter on the right */
+    background: linear-gradient(to right, rgba(11, 12, 16, 0.95) 35%, rgba(11, 12, 16, 0.5) 100%);
+    z-index: 1;
+}
+
+/* Content Element Block Positioning wrapper */
+.hero-content {
+    max-width: 650px;
+    position: relative;
+    z-index: 2; /* Ensures text is clickable and sits above the video and tint */
+}
+
+.badge {
+    display: inline-block;
+    background-color: rgba(225, 6, 0, 0.2);
+    color: #fff;
+    border: 1px solid var(--primary-color);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero h1 .highlight {
+    color: var(--primary-color);
+    position: relative;
+}
+
+.hero p {
+    font-size: 1.15rem;
+    color: #e2e8f0; /* Boosted brightness slightly for photo readability */
+    line-height: 1.6;
+    margin-bottom: 35px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.hero-actions .btn {
+    margin-right: 15px;
+}
+
+/* Stats Banner */
+.stats-banner {
+    background-color: #141a24;
+    display: flex;
+    justify-content: space-around;
+    padding: 40px 8%;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    text-align: center;
+}
+
+.stat-item h3 {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.stat-item p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+}
+
+/* Features Section */
+.features {
+    padding: 100px 8%;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    color: var(--text-gray);
+    margin-bottom: 60px;
+    font-size: 1.1rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.feature-card {
+    background-color: var(--bg-card);
+    padding: 40px 30px;
+    border-radius: 12px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255,255,255,0.02);
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    border-color: rgba(225, 6, 0, 0.2);
+}
+
+.feature-card .icon {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: var(--text-gray);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* Footer */
+.footer {
+    background-color: #06070a;
+    padding: 40px 8%;
+    border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: var(--text-gray);
+    font-size: 0.9rem;
+}
+
+.admin-link {
+    color: var(--text-gray);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.admin-link:hover {
+    color: var(--primary-color);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .hero {
+        background-position: center center;
+    }
+    .hero-overlay {
+        background: rgba(11, 12, 16, 0.85); /* Slightly darker solid wrap for tighter mobile viewports */
+    }
+    .hero h1 { font-size: 2.5rem; }
+    .stats-banner { flex-direction: column; gap: 30px; }
+    .footer-content { flex-direction: column; text-align: center; }
+}
